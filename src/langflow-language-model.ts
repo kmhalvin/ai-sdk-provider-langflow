@@ -113,8 +113,8 @@ export class LangflowLanguageModel implements LanguageModelV3 {
                         if (event.event === "token") {
                             controller.enqueue({
                                 type: "text-delta",
-                                textDelta: event.data.chunk || "",
-                            } as unknown as LanguageModelV3StreamPart);
+                                delta: event.data.chunk || "",
+                            } as LanguageModelV3StreamPart);
                         } else if (event.event === "end") {
                             const finishReason: LanguageModelV3FinishReason = { unified: "stop", raw: "stop" };
                             controller.enqueue({

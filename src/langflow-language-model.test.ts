@@ -143,8 +143,8 @@ describe("LangflowLanguageModel", () => {
             }
 
             expect(chunks.length).toBe(3);
-            expect(chunks[0]).toEqual({ type: "text-delta", textDelta: "Hello" });
-            expect(chunks[1]).toEqual({ type: "text-delta", textDelta: " World" });
+            expect(chunks[0]).toEqual({ type: "text-delta", delta: "Hello" });
+            expect(chunks[1]).toEqual({ type: "text-delta", delta: " World" });
             expect(chunks[2]).toEqual(expect.objectContaining({ type: "finish" }));
             expect((chunks[2] as any).finishReason.unified).toBe("stop");
         });
@@ -172,7 +172,7 @@ describe("LangflowLanguageModel", () => {
             const reader = stream.getReader();
 
             const chunk1 = await reader.read();
-            expect(chunk1.value).toEqual({ type: "text-delta", textDelta: "1" });
+            expect(chunk1.value).toEqual({ type: "text-delta", delta: "1" });
 
             abortSignal.aborted = true;
 
